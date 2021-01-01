@@ -5,56 +5,99 @@
 #include <iostream>
 #include <bits/unique_ptr.h>
 #include <cstring>
+#include <bits/std_function.h>
+#include <cmath>
 using namespace std;
 
-class X {
-    int v;
-public:
-    X(int x) {
-        cout << x << endl;
-    };
-    void *operator new(size_t, void *p){
-        cout << p << endl;
-        return p;
-    }
 
-    void print() {
-        cout << "V: " << v << endl;
-    }
-    void set_value(int x) {
-        cout << "Setting the values" ;
-//        v= x;
-    }
-};
 
-class X2{
-public:
-    virtual void *alloc(size_t) =0;
-    virtual void free(void *) =0;
-};
+int add_constant(int x, const int v) {
+    return x + v;
 
-void *operator new(size_t sz, X2 *x) {
-    return x->alloc(sz);
 }
 
+class List {
+    int elm[3];
+public:
+    List(const int v[]){
+        for(int i=0;i<3; i++) {
+            elm[i] = v[i];
+        }
+    }
+    List(const List &l) {
+        for(int i=0;i<3; i++) {
+            elm[i] = l.get_elem(i);
+        }
+
+    }
+
+    int get_elem(int i) const{
+        return elm[i];
+    }
+
+    int *begin() {
+        return &elm[0];
+    }
+
+    int *end() {
+        return elm + 3;
+    }
+
+    void set_value(int i, int value) {
+        elm[i] = value;
+    }
+};
+
+ostream &operator<<(ostream& os, const List &l) {
+    cout << "[" ;
+    for(int i=0; i<3; i++){
+        cout << l.get_elem(i);
+        if(i<=1)
+            cout<<", ";
+    }
+    cout << "]";
+
+    cout << endl;
+
+
+    return  os;
+}
+template <typename T>
+using Func = std::function<T(T)>;
+
+template<class T>
+void map(T l, const std:: function<void(int *, int)>& q){
+    int *p;
+    int i = 0;
+    for(int x:l){
+        p =&x;
+        q(p, (long )i);
+        i++;
+    }
+}
 
 void t1() {
-    void *buf = reinterpret_cast<void *>(0xF00F);
+    int a[] = {1,-2,3};
+    List l(a);
+    cout << l;
 
-    X *p2 = new(buf) X{4}; // new(sizeof(X),buf)
+    std::function <void(int *, int )> filter= [&l](int *x, int i) mutable {
+            *x = *x<0 ? 0 : *x;
+            l.set_value(i, *x);
+    };
+    std::function <void(int *, int )> square= [&l](int *x, int i) mutable {
+        *x = pow(*x, 2);
+        l.set_value(i, *x);
+    };
+    map<List>(l,filter);
+    map<List>(l,square);
 
-    cout << p2;
+    double (*p3)(int) = [](int a) { return sqrt(a); };
 
-    X2 *x2;
-    X *p = new(x2) X{2};
-    X *q = new(x2) X{4};
-
-    q ->set_value(2);
-    p->print();
-    q->print();
+    cout << l;
+    cout << p3(4);
 
 }
-
 
 int main() {
     t1();
