@@ -3,5 +3,4 @@ project(cplus)
 
 set(CMAKE_CXX_STANDARD 14)
 
-#add_executable(cplus main.cpp)
-add_executable(cplus partII/src/p10.cpp)
+add_executable(cplus partII/src/p14.cpp)
