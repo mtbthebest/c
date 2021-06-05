@@ -90,6 +90,7 @@ public:
         p1=_p1;
         p2=_p2;
     }
+    // Friend Relationship
     Line(Points _pts){
         p1 = _pts.pts[1];
         p2 = _pts.pts[1];

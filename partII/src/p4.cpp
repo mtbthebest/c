@@ -54,7 +54,7 @@ void t3() {
 
 
 int  main(int arg, char **argv){
-    t3();
+    t1();
 
     return  0;
 

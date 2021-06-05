@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16.5)
 project(cplus)
 set( CMAKE_BUILD_TYPE Debug )
 set(CMAKE_CXX_STANDARD 14)
 
 
 add_executable(
-        cplus partIII/src/p23.cpp
+        cplus partII/src/p14.cpp
 )

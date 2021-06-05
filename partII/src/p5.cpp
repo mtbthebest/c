@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include "stdio.h"
 #include "cstring"
 using  namespace std;
 
@@ -93,6 +94,7 @@ void t7() {
     r = &z;
 
     cout << (void *) p << ", " << (void *) q << endl;
+    printf("%p", p);
     cout << (void *) (q-p) << endl;
     cout <<  (q-p) << endl;
     cout << (r - p) << endl;

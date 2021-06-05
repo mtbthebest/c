@@ -18,7 +18,7 @@ public:
         }
     };
 
-    ~List(){}
+    ~List(){delete [] elements;}
 
     int index (int i) const {
         if(i>= size) throw range_error("Above the size");
