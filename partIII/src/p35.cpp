@@ -59,11 +59,11 @@ void t1(){
 
     pd->y = 10;
 
-//    pd = &b; // Error
+//    pd = &b; // Error Upcast
 //    pd = pb;  // Error
 
     Base *pb2 = pd;
-    pb = dynamic_cast<Base *>(pd); // Base must be polymorphic if downcast(not always checl t2 where the target is not polymorphic). Same as     pb = pd;
+    pb = dynamic_cast<Base *>(pd); // Base must be polymorphic if downcast(not always check t2 where the target is not polymorphic). Same as     pb = pd;
     if(pb){
         pb->print();
 

@@ -8,7 +8,7 @@ using namespace std;
 struct V{
     int m;
     V(int i){
-        cout << "Initialized V" << endl;
+        cout << "Initialized V : " << i << endl;
         m = i;
     }
 };
@@ -21,7 +21,7 @@ struct A{
 };
 
 struct B: virtual V, virtual A{
-    B(): V(1){
+    B(int i): V(i){
         cout << "Initialized B" << endl;
 
     }
@@ -36,19 +36,18 @@ struct C: virtual V {
 
 class D: virtual public B, virtual public C{
     public:
-    D(int i1, int i) : V(i1), C(i) {
+    D(int i1, int i) : B(i1), C(i), V(i) {// Must initialize Virtual V
         cout << "Initialized D" << endl;
 
     };
 };
 
 int main(int argc, char **argv){
-    B  b;
-    cout << "---------------------" << endl;
+    B  b{-9};
+    cout << "---------------------" << b.m << endl;
 
-    D d{4,5};
+    D d{4,15};
 
-    cout << b.m << endl;
     cout << d.m  << endl;
 
 

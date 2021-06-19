@@ -34,9 +34,21 @@ void t1(){
     Derived d=Derived(0, 2);
 
 //    Derived &d2 = dynamic_cast<Derived&>(b); // Error not possible downcast
+    Base *pb = &b;
     Derived &d2 = dynamic_cast<Derived&>(d);
+//    Derived *d2 = dynamic_cast<Derived*>(pb); // Downcast Base must be polymorphic
 
-
+ /*
+    Derived *pd = &d2;
+    Base *pb1 = dynamic_cast<Base*>(pd);
+    // Ok upcast without polymorphism
+    */
+    try{
+        d2.getView();
+    }
+    catch(bad_cast &b){
+        cout << "Error " << b.what();
+    }
 }
 
 int main(){
