@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 add_executable(
-        cplus partIV/src/p2.cpp
+        cplus partIV/src/p4.cpp
 
-        )
+)
